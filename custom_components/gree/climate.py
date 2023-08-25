@@ -66,7 +66,7 @@ MAX_TEMP = 30
 HVAC_MODES = [HVAC_MODE_AUTO, HVAC_MODE_COOL, HVAC_MODE_DRY, HVAC_MODE_FAN_ONLY, HVAC_MODE_HEAT, HVAC_MODE_OFF]
 
 FAN_MODES = ['Auto', 'Low', 'Medium-Low', 'Medium', 'Medium-High', 'High', 'Turbo', 'Quiet']
-SWING_MODES = ['Default', 'Swing in full range', 'Fixed in the upmost position', 'Fixed in the middle-up position', 'Fixed in the middle position', 'Fixed in the middle-low position', 'Fixed in the lowest position', 'Swing in the downmost region', 'Swing in the middle-low region', 'Swing in the middle region', 'Swing in the middle-up region', 'Swing in the upmost region']
+SWING_MODES = ['Default', 'Swing in full range', 'Fixed in the left position', 'Fixed in the middle-left position', 'Fixed in the middle position', 'Fixed in the middle-right position', 'Fixed in the right position']
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
@@ -405,7 +405,7 @@ class GreeClimate(ClimateEntity):
 
     def UpdateHACurrentSwingMode(self):
         # Sync current HVAC Swing mode state to HA
-        self._swing_mode = self._swing_modes[self._acOptions['SwUpDn']]
+        self._swing_mode = self._swing_modes[self._acOptions['SwingLfRig']]
         _LOGGER.info('HA swing mode set according to HVAC state to: ' + str(self._swing_mode))
 
     def UpdateHAFanMode(self):
@@ -764,8 +764,8 @@ class GreeClimate(ClimateEntity):
         # set the swing mode
         if not (self._acOptions['Pow'] == 0):
             # do nothing if HVAC is switched off
-            _LOGGER.info('SyncState with SwUpDn=' + str(swing_mode))
-            self.SyncState({'SwUpDn': self._swing_modes.index(swing_mode)})
+            _LOGGER.info('SyncState with SwingLfRig=' + str(swing_mode))
+            self.SyncState({'SwingLfRig': self._swing_modes.index(swing_mode)})
             self.schedule_update_ha_state()
 
     def set_fan_mode(self, fan):
