@@ -1,7 +1,9 @@
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
-
-# HomeAssistant-GreeClimateComponent
+# HomeAssistant-GreeClimateComponent (horizontal swing mode)
 Custom Gree climate component written in Python3 for Home Assistant. Controls AC's supporting the Gree protocol.
+
+Forked from https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent
+Changed swing mode from vertical to horizontal
+
 
 Tested on the following hardware:
 - Innova HVAC
